@@ -1,19 +1,80 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
+    <h4 *ngIf="searchmode === false">Category: {{ currentCategoryName }}</h4>
+    <hr />
+
     <div class="container-fluid">
       <div class="row">
-
         <!-- loop over the collection of products -->
         <div *ngFor="let tempProduct of products" class="col-md-3">
           <div class="product-box">
-              <img src="{{ tempProduct.imageUrl }}" class="img-responsive" alt="{{ tempProduct.name }}" />
+            <a routerLink="/products/{{ tempProduct.id }}">
+              <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
+            </a>
+            <a routerLink="/products/{{ tempProduct.id }}">
               <h1>{{ tempProduct.name }}</h1>
-              <div class="price">{{ tempProduct.unitPrice | currency:'USD' }}</div>
-              <a href="#" class="primary-btn nounderline">Add to cart</a>
+            </a>
+            <div class="price">
+              {{ tempProduct.unitPrice | currency : "USD" }}
+            </div>
+            <a href="#" class="primary-btn nounderline">Add to cart</a>
           </div>
         </div>
 
+        <!-- if products empty then display a message -->
+
+        <div
+          *ngIf="products?.length === 0"
+          class="alert alert-warning col-md-12"
+          role="alert"
+        >
+          No products found.
+        </div>
       </div>
+
+      <!-- begin footer -->
+      <div class="footer-pagination">
+        <div class="row">
+          <div class="col-md-9" style="padding-left: 30%">
+            <div class="row">
+              <div class="col-md-9">
+                <ngb-pagination
+                  [(page)]="thePageNumber"
+                  [pageSize]="thePageSize"
+                  [collectionSize]="theTotalElements"
+                  (pageChange)="listProducts()"
+                  [maxSize]="5"
+                  [boundaryLinks]="true"
+                  class="d-flex justify-content-end"
+                >
+                  <ng-template ngbPaginationFirst>First</ng-template>
+                  <ng-template ngbPaginationLast>Last</ng-template>
+                  <ng-template ngbPaginationPrevious>Prev</ng-template>
+                  <ng-template ngbPaginationNext>Next</ng-template>
+                  <ng-template ngbPaginationEllipsis>...</ng-template>
+                  <ng-template ngbPaginationNumber let-page>{{
+                    page
+                  }}</ng-template>
+                </ngb-pagination>
+
+              </div>
+              <div class="col-md-3 mt-2" style="text-align:left;">
+                <span class="mr-2">Page Size: </span>
+                <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                  <option [value]="2">2</option>
+                  <option [value]="5" selected>5</option>
+                  <option [value]="10">10</option>
+                  <option [value]="15">15</option>
+                  <option [value]="20">20</option>
+                  <option [value]="50">50</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end footer -->
     </div>
   </div>
 </div>
