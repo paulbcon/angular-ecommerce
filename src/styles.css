@@ -732,7 +732,7 @@ table.table.table-bordered th{
 
 .detail-img {
   width: 30%;
-  
+
 }
 
 /**/
@@ -945,6 +945,12 @@ footer ul li{
   }
 }
 
+/* Error message */
+.error-message {
+  font-size:0.8em;
+  padding: 0.2em 0.5em;
+  color: rgb(110, 8, 8);
+}
 
 @media (max-width:767px){
     .au-input-xl{
@@ -955,7 +961,7 @@ footer ul li{
       margin-right:15px
   }
       .main-content.page-m{
-      padding:10% 0!important
+      padding:10% 30% 10% 5% !important
   }
   .header-mobile .navbar-mobile{
       display:none;
