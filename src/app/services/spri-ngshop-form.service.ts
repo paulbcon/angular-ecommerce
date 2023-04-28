@@ -4,14 +4,15 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Country } from '../common/country';
 import { State } from '../common/state';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpriNGShopFormService {
 
-  private countriesUrl = `http://localhost:8080/api/countries`;
-  private statesUrl = `http://localhost:8080/api/states`;
+  private countriesUrl = environment.springshopApiUrl + `/countries`;
+  private statesUrl = environment.springshopApiUrl + `/states`;
 
   constructor(private httpClient: HttpClient) {}
 

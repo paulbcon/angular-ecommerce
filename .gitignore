@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Okta config file
+/src/app/config/my-app-config.ts
